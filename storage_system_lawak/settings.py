@@ -55,7 +55,7 @@ ROOT_URLCONF = 'storage_system_lawak.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'], # Tambahkan kode ini
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

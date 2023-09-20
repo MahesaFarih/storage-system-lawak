@@ -1,8 +1,37 @@
-<h1>The Best Storage System within 4 meters</h1>
+{% extends 'base.html' %}
+{% block content %}
+    <h1>The Best Storage System within 4 meters</h1>
 
-<h5>Barang: </h5>
-<p>{{name}}</p>\
-<h5>Harga: </h5>
-<p>{{price}}</p>
-<h5>Deskripsi: </h5>
-<p>{{description}}</p>
+    <h2>Please input your items do be stored in the database</h2>
+
+    <h2>Kamu menyimpan {{total}} item pada aplikasi ini</h2>
+
+    <h5>items: </h5>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Qty</th>
+            <th>Description</th>
+            <th>Date Added</th>
+        </tr>
+
+        {% for product in products %}
+            <tr>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.date_added}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'main:create_product' %}">
+        <button>
+            Add New Product
+        </button>
+    </a>
+    
+    {% endblock content %}
