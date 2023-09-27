@@ -19,7 +19,7 @@
         {% for product in products %}
             <tr>
                 <td>{{product.name}}</td>
-                <td>{{product.price}}</td>
+                <td>{{product.Qty}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.date_added}}</td>
             </tr>
@@ -33,5 +33,19 @@
             Add New Product
         </button>
     </a>
+
+    <a href="{% url 'main:edit_products' %}">
+        <button>
+            Edit Products
+        </button>
+    </a>
     
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+    
+    <a href="{% url 'main:logout' %}">
+        <button>
+            Logout
+        </button>
+    </a>
+
     {% endblock content %}
