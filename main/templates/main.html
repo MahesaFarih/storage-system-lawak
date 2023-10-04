@@ -1,14 +1,43 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>The Best Storage System within 4 meters</h1>
+    <style>
+        h2 {
+        font-family: consolas;
+        font-size: 200%;
+        text-align: center;
+        margin: 30px;
+        }
+        table {
+            width:40%;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: consolas;
+            font-size: 130%;
+            margin: 30px;
+        }
+        table.center {
+            margin-left: auto; 
+            margin-right: auto;
+        }
 
-    <h2>Please input your items do be stored in the database</h2>
+    </style>
 
-    <h2>Kamu menyimpan {{total}} item pada aplikasi ini</h2>
+    <h1>The Best Storage System within 4 meters
+        <style>
 
-    <h5>items: </h5>
+            </style>
+    </h1>
 
-    <table>
+    <h2>
+
+        Kamu menyimpan {{total}} item pada aplikasi ini
+    </h2>
+
+
+    <table class="center">
+        <style >
+
+        </style>
         <tr>
             <th>Name</th>
             <th>Qty</th>
@@ -34,7 +63,7 @@
         </button>
     </a>
 
-    <a href="{% url 'main:edit_products' %}">
+    <a href="#">
         <button>
             Edit Products
         </button>

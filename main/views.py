@@ -61,18 +61,20 @@ def create_product(request):
     context = {'form': form}
     return render(request, "create_product.html", context)
 
-def edit_products(request):
-    form = ProductForm(request.POST or None)
+def edit_product(request, id):
+    # Get product berdasarkan ID
+    product = Product.objects.get(pk = id)
 
-    products = Product.objects.filter(user=request.user)
-    context = {
-        'name': request.user.username,
-        'total' : count_item(products),
-        'products': products,
-        'last_login': request.COOKIES['last_login'],
-    }
+    # Set product sebagai instance dari form
+    form = ProductForm(request.POST or None, instance=product)
 
-    return render(request, "edit_products.html", context)
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
 
 
 def show_xml(request):

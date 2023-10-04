@@ -1,11 +1,13 @@
-# Jawaban tugas 3
+# Jawaban tugas 5
 
-1. UserCreationForm merupakan sistem otentikasi yang disediakan oleh Django. Kelebihan dari UserCreationForm (UCF) adalah simplisitas implementasi dari form tersebut simpel dan mudah diterapkan. Kekurangannya adalah keterbatasan isi dari UCF dari identitas user tersebut
+1. Element selector CSS berguna saat kita ingin mendesain sebuah element HTML secara terpisah pisah dengan body, contohnya saat mendesai h1 kita memerlukan margin 50px, sedangkan untuk elemen lain kita tidak perlu margin sebesar itu
 
-2. Perbedaan dari autentikasi dengan otorisasi adalah dimana autentikasi adalah pengecekan apakah metode untuk mengecek apakah sebuah user A merupakan benar user A, sedangkan otorisasi adalah memberikan izin untuk mengakses program tersebut
+2. Ada banyak tag dari HTML5, yang umumnya adalah head untuk menandakan head dari sebuah dokumen, h1 sampai h6 menyatakan header dari yang paling utama terlebih dahulu, nav digunakan untuk link navigasi, style adalah tempat untuk menaruh styling css, body sebagai badan dari dokumen, table untuk data berupa tabel, dan td sebagai sebuah cell dalam tabel tersebut
 
-3. Cookie adalah text file kecl yang digunakan untuk mengidentifikasi user secara lokal, Djanggo menggunakan cookie sebagai pertanda apabila suatu user dalam suatu sistem sudah di autentikasi sehingga dapat masuk kedalam progrm tanpa perlu login kembali
+3. Margin digunakan untuk membatasi teks tanpa membatasi elemen CSS, sedangkan padding membatasi sebuah elemen dalam HTML termasuk styling CSS
 
-4. Cookies secara default harusnya diterapkan sebagai default dala pengembangan web karena memudahkan experience user tanpa perlu melakukan input kembali ketika mengakses web tersebut. Hal yang perlu diperhatikan pada penggunaan cookie adalah cookie bisa dicuri oleh hacker sehingga suatu sistem lain bisa menggunakan autentikasi sistem kita walaupun tidak mengetahui data data yang sudah diinput
+4. Perbedaan utama antara Tailwind dengan Bootstrap adalah fleksibilitas, kemudahan, kelengkapan class CSS, dan konsistensi. Tailwind CSS lebih fleksibel dalam penggunaannya dan ukuran yang lebih kecil dibandingkan Bootstrap. Namun, Bootstrap lebih mudah digunakan dan dapat langsung diterapkan dalam sebuah projek.
+
+5. Untuk Styling CSS dalam tugas ini, kita tentukan bagaimana dasar dari projek kita, kemudian kita mendesain elemen elemen yang ada dalam projek sesuai dengan styling dasar yang kita inginkan, untuk Navbar yang perlu dilakukan adalah mengambil contoh yang sudah disediakan oleh Bootstrap dan menyesuaikan dengan proyek yang kita kerjakan
 
 
