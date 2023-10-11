@@ -1,24 +1,61 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3" >
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Qty" class="col-form-label">Qty:</label>
+                        <input type="number" class="form-control" id="Qty" name="Qty"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <style>
+        h3 {
+        font-family: consolas;
+        font-size: 100%;
+        text-align: center;
+        margin: 30px;
+        }
         h2 {
         font-family: consolas;
         font-size: 200%;
         text-align: center;
         margin: 30px;
         }
-        table {
-            width:40%;
+        table, th, td {
+            
             margin-left: auto;
             margin-right: auto;
             font-family: consolas;
-            font-size: 130%;
+            font-size: 110%;
             margin: 30px;
         }
-        table.center {
-            margin-left: auto; 
-            margin-right: auto;
-        }
+        
+
 
     </style>
 
@@ -29,52 +66,71 @@
     </h1>
 
     <h2>
-
         Kamu menyimpan {{total}} item pada aplikasi ini
     </h2>
 
+    <div class="row justify-content-center">
+        <div class="col-auto">
+          <table class="table table-responsive">
+            <table id="product_table" style ="width:100%"; ></table>
+            </table>
+        </div>
+    </div>
 
-    <table class="center">
-        <style >
+    <script>
+        async function getProducts() {
+            return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+        }   
+        async function refreshProducts() {
+            document.getElementById("product_table").innerHTML = ""
+            const products = await getProducts()
+            let htmlString = `<tr>
+                <th>Name</th>
+                <th>Qty</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Edit Items</th>
+            </tr>`
+            products.forEach((item) => {
+                htmlString += `\n<tr>
+                <td>${item.fields.name}</td>
+                <td>${item.fields.Qty}</td>
+                <td>${item.fields.description}</td>
+                <td>${item.fields.date_added}</td>
+            </tr>` 
+            })
+            
+            document.getElementById("product_table").innerHTML = htmlString
+        }
 
-        </style>
-        <tr>
-            <th>Name</th>
-            <th>Qty</th>
-            <th>Description</th>
-            <th>Date Added</th>
-        </tr>
+    refreshProducts()
 
-        {% for product in products %}
-            <tr>
-                <td>{{product.name}}</td>
-                <td>{{product.Qty}}</td>
-                <td>{{product.description}}</td>
-                <td>{{product.date_added}}</td>
-            </tr>
-        {% endfor %}
-    </table>
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+    document.getElementById("button_add").onclick = addProduct
+    </script>
+
     
     <br />
     
-    <a href="{% url 'main:create_product' %}">
-        <button>
-            Add New Product
-        </button>
-    </a>
+    <p style="text-align: center;">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin: 10px;">Add Product by AJAX</button>
+        <a href="{% url 'main:logout' %}" class="btn btn-danger" role="button"  style="margin: 10px;">Logout</a>
+    </p>
 
-    <a href="#">
-        <button>
-            Edit Products
-        </button>
-    </a>
-    
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
-    
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
+    <h3>
 
+        Last login : {{last_login}}
+    </h3>
+
+    
     {% endblock content %}
+
+

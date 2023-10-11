@@ -1,20 +1,22 @@
 from multiprocessing import context
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from main.forms import ProductForm
 from django.urls import reverse
 from django.http import HttpResponse
 from django.core import serializers
-import json
-from main.models import Product
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
+from django.http import HttpResponseNotFound
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+
+from main.models import Product
 
 def logout_user(request):
     logout(request)
@@ -48,6 +50,26 @@ def register(request):
             return redirect('main:login')
     context = {'form':form}
     return render(request, 'register.html', context)
+
+def get_product_json(request):
+    product_item = Product.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+
+
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_product = Product(name=name, price=price, description=description, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
 
 def create_product(request):
     form = ProductForm(request.POST or None)

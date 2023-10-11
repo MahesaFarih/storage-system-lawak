@@ -16,11 +16,11 @@
         <style>
             
             body {
-                background-color:  #101019;
-                color:  #ccccff;
+                /*background-color:  #101019;
+                 color:  #ccccff; */
             }
             h1 {
-                color:  #ccccff;
+               /* color:  #ccccff;  */ 
               font-family: consolas;
               font-size: 300%;
               text-align: center;
@@ -41,7 +41,7 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="#">User Info</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -61,10 +61,11 @@
                     <a class="nav-link disabled">Disabled</a>
                   </li>
                 </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <nav class="navbar bg-light">
+                  <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1">Last login : {{user}}</span>
+                  </div>
+                </nav>
               </div>
             </div>
           </nav>
